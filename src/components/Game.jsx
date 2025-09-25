@@ -114,10 +114,11 @@ export default function Game() {
                onClick={() => setShowHistory(v => !v)}
                aria-label="Show move history"
             >
-               <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <circle cx="11" cy="11" r="10" stroke="#4b4b7c" strokeWidth="2"/>
-                  <rect x="10" y="5" width="2" height="7" rx="1" fill="#4b4b7c"/>
-                  <rect x="10" y="14" width="2" height="2" rx="1" fill="#4b4b7c"/>
+               <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <circle cx="14" cy="14" r="11" stroke="#4b4b7c" strokeWidth="2"/>
+                  <path d="M14 9v5l3 3" stroke="#4b4b7c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M7.5 14a6.5 6.5 0 1 1 6.5 6.5" stroke="#4b4b7c" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                  <polyline points="7.5,16 7.5,14 9.5,14" stroke="#4b4b7c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                </svg>
             </button>
             <div className={`history-panel-accordion${showHistory ? " open" : ""}`}>
