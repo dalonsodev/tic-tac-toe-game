@@ -105,6 +105,45 @@ h1 {
   100% { transform: translateY(220px) scale(1) rotate(360deg);}
 }
 
+/* Custom Confetti */
+.confetti-custom {
+  pointer-events: none;
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -24px;
+  opacity: 0.85;
+  animation: confetti-fall-custom 1.5s cubic-bezier(.6,.3,.4,1.1) forwards;
+}
+
+.confetti-piece.circle {
+  border-radius: 50%;
+}
+
+.confetti-piece.rect {
+  border-radius: 8px;
+}
+
+@keyframes confetti-fall-custom {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1) rotate(var(--rotate, 0deg));
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(80vh) scale(1.1) rotate(var(--rotate, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0.9) rotate(var(--rotate, 0deg));
+  }
+}
+
 /* --- History Button & Panel --- */
 .history-toggle-btn {
   position: absolute;
@@ -377,4 +416,28 @@ h1 {
   max-height: 240px;
   padding: 14px 10px 10px 10px;
   margin-top: 10px;
+}
+
+.new-game-btn {
+  margin: 18px 0 0 0;
+  padding: 12px 32px;
+  background: linear-gradient(90deg, #ff4081 0%, #2979ff 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 2px 12px rgba(80,80,120,0.10);
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  letter-spacing: 0.5px;
+  outline: none;
+  display: block;
+}
+
+.new-game-btn:hover,
+.new-game-btn:focus {
+  background: linear-gradient(90deg, #2979ff 0%, #ff4081 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px rgba(80,80,120,0.16);
 }

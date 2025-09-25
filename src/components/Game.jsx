@@ -1,63 +1,28 @@
 import React, { useState, useEffect } from "react"
 import Board from "./Board"
 import { calculateWinner } from "../helpers"
-
-function FireworkBurst({ show }) {
-   if (!show) return null
-   return (
-      <svg
-         className="firework-burst"
-         width="120"
-         height="120"
-         viewBox="0 0 120 120"
-         fill="none"
-         xmlns="http://www.w3.org/2000/svg"
-      >
-         <g>
-            {[...Array(8)].map((_, i) => (
-               <line
-                  key={i}
-                  x1="60"
-                  y1="60"
-                  x2={60 + 48 * Math.cos((i * Math.PI) / 4)}
-                  y2={60 + 48 * Math.sin((i * Math.PI) / 4)}
-                  stroke={i % 2 === 0 ? "#ff4081" : "#2979ff"}
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  className="burst-line"
-                  style={{ animationDelay: `${i * 0.07}s` }}
-               />
-            ))}
-            <circle
-               cx="60"
-               cy="60"
-               r="18"
-               fill="#ffb300"
-               opacity="0.7"
-               className="burst-center"
-            />
-         </g>
-      </svg>
-   )
-}
+import Confetti from "./Confetti"
 
 export default function Game() {
    const [history, setHistory] = useState([new Array(9).fill(null)])
    const [stepNumber, setStepNumber] = useState(0)
    const [xIsNext, setXisNext] = useState(true)
    const [showHistory, setShowHistory] = useState(false)
-   const [showFirework, setShowFirework] = useState(false)
+   const [showConfetti, setShowConfetti] = useState(false)
    const result = calculateWinner(history[stepNumber])
    const winner = result?.winner
    const winningLine = result?.line || []
 
+   // Check for tie: no winner and all squares filled
+   const isTie = !winner && history[stepNumber].every(Boolean)
+
    useEffect(() => {
       if (winner) {
-         setShowFirework(true)
-         const timeout = setTimeout(() => setShowFirework(false), 1400)
+         setShowConfetti(true)
+         const timeout = setTimeout(() => setShowConfetti(false), 1400)
          return () => clearTimeout(timeout)
       } else {
-         setShowFirework(false)
+         setShowConfetti(false)
       }
    }, [winner])
 
@@ -65,7 +30,7 @@ export default function Game() {
       const timeInHistory = history.slice(0, stepNumber + 1)
       const current = timeInHistory[stepNumber]
       const squares = [...current]
-      if (winner || squares[i]) return
+      if (winner || squares[i] || isTie) return
       squares[i] = xIsNext ? "X" : "O"
       setHistory([...timeInHistory, squares])
       setStepNumber(timeInHistory.length)
@@ -75,6 +40,13 @@ export default function Game() {
    function jumpTo(step) {
       setStepNumber(step)
       setXisNext(step % 2 === 0)
+   }
+
+   function handleNewGame() {
+      setHistory([new Array(9).fill(null)])
+      setStepNumber(0)
+      setXisNext(true)
+      setShowConfetti(false)
    }
 
    function renderMoves() {
@@ -94,19 +66,23 @@ export default function Game() {
 
    return (
       <div className="game-container" style={{position: "relative", minHeight: 420}}>
-         <div style={{position: "absolute", left: 0, right: 0, top: -60, display: "flex", justifyContent: "center", pointerEvents: "none"}}>
-            <FireworkBurst show={showFirework} />
-         </div>
          <h1>
             <span role="img" aria-label="Tic Tac Toe">🎲</span> Tic Tac Toe
          </h1>
          <div className="status">
             {winner 
                ? <span className="winner-text">🎉 Winner: <span className={winner === "X" ? "turn-x" : "turn-o"}>{winner}</span> 🎉</span>
-               : <>Next Player: <span className={xIsNext ? "turn-x" : "turn-o"}>{xIsNext ? "X" : "O"}</span></>
+               : isTie
+                  ? <span className="winner-text">🤝 It's a tie!</span>
+                  : <>Next Player: <span className={xIsNext ? "turn-x" : "turn-o"}>{xIsNext ? "X" : "O"}</span></>
             }
          </div>
          <Board squares={history[stepNumber]} onClick={handleClick} winningLine={winningLine} />
+         {(winner || isTie) && (
+            <button className="new-game-btn" onClick={handleNewGame}>
+               New Game
+            </button>
+         )}
          <div className="history-accordion">
             <button
                className="history-toggle-btn"
@@ -125,6 +101,7 @@ export default function Game() {
                {renderMoves()}
             </div>
          </div>
+         <Confetti show={showConfetti} />
       </div>
    )
 }
