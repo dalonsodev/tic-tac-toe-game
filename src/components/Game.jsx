@@ -87,7 +87,7 @@ export default function Game() {
             <button
                className="history-toggle-btn"
                title="Show move history"
-               onClick={() => setShowHistory(v => !v)}
+               onClick={() => setShowHistory(prev => !prev)}
                aria-label="Show move history"
             >
                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">

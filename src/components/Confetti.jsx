@@ -8,7 +8,7 @@ function randomBetween(a, b) {
   return Math.random() * (b - a) + a
 }
 
-export default function Confetti({ show, pieces = 22 }) {
+export default function Confetti({ show, pieces = 122 }) {
   if (!show) return null
   return (
     <div className="confetti-custom">
