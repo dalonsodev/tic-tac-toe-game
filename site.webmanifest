@@ -2,7 +2,6 @@
    "name": "Tic Tac Toe Game",
    "short_name": "TicTacToe",
    "description": "A playful, modern, and elegant Tic Tac Toe game with vibrant colors and smooth animations.",
-   "start_url": ".",
    "display": "standalone",
    "background_color": "#ece9f7",
    "theme_color": "#ff4081",

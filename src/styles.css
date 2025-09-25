@@ -114,13 +114,29 @@ h1 {
   color: #4b4b7c;
   border: none;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   font-size: 1.3em;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(80, 80, 120, 0.08);
-  transition: background 0.18s, color 0.18s;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
   z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  overflow: visible;
+}
+
+.history-toggle-btn svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #4b4b7c;
 }
 
 .history-toggle-btn:hover {
@@ -152,16 +168,17 @@ h1 {
 /* Board styling */
 .board {
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  gap: 0;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 12px; /* Add gap for both rows and columns */
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 32px;    /* more space below board */
+  margin-bottom: 32px;
   box-shadow: 0 4px 24px rgba(80,80,120,0.10);
   background: #e9eaf6;
   border: 3px solid #e0e0ef;
-  width: 204px;
-  height: 204px;
+  width: 216px; /* 3*64px + 2*12px gap */
+  height: 216px;
 }
 
 /* Square styling and animation */
@@ -184,6 +201,19 @@ h1 {
   position: relative;
   outline: none;
   overflow: hidden;
+  padding: 0; /* Ensure no default button padding */
+  text-align: center; /* Ensure text is centered */
+}
+
+.square-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .square.filled .square-value {
@@ -216,13 +246,6 @@ h1 {
 .square:disabled {
   cursor: default;
   opacity: 0.7;
-}
-
-.square-value {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  pointer-events: none;
 }
 
 .moves-list {
@@ -314,8 +337,8 @@ h1 {
   color: #4b4b7c;
   border: none;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   font-size: 1.3em;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(80, 80, 120, 0.08);
@@ -324,11 +347,12 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 0 auto; /* center horizontally */
-  position: relative;    /* remove absolute positioning */
+  margin: 0 auto;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
+  overflow: visible;
 }
 
 .history-toggle-btn:hover {
