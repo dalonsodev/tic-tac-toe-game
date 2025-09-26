@@ -33,13 +33,13 @@ button {
    align-items: center;
    gap: 0;
    width: 100%;
-   max-width: 370px; /* or 360px, adjust as you like */
+   max-width: 320px; /* slightly narrower for small screens */
    box-sizing: border-box;
 }
 
 @media (min-width: 500px) {
    .game-container {
-      max-width: 420px;
+      max-width: 400px; /* keep a bit narrower on wider screens too */
    }
 }
 
