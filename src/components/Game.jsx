@@ -65,7 +65,7 @@ export default function Game() {
    }
 
    return (
-      <div className="game-container" style={{position: "relative", minHeight: 420}}>
+      <div className="game-container">
          <h1>
             <span role="img" aria-label="Tic Tac Toe">🎲</span> Tic Tac Toe
          </h1>
