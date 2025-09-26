@@ -328,40 +328,6 @@ h1 {
    color: #2979ff !important;
 }
 
-/* Firework burst animation */
-.firework-burst {
-   pointer-events: none;
-   position: absolute;
-   top: 0;
-   left: 50%;
-   transform: translate(-50%, 0);
-   opacity: 0;
-   animation: firework-fade 1.3s;
-   z-index: 20;
-}
-@keyframes firework-fade {
-   0% { opacity: 0; transform: translate(-50%, 0) scale(0.5);}
-   10% { opacity: 1; transform: translate(-50%, 0) scale(1.1);}
-   60% { opacity: 1; transform: translate(-50%, 0) scale(1);}
-   100% { opacity: 0; transform: translate(-50%, 0) scale(0.7);}
-}
-.burst-line {
-   stroke-dasharray: 0 48;
-   animation: burst-line-grow 0.7s forwards;
-}
-@keyframes burst-line-grow {
-   to { stroke-dasharray: 48 0; }
-}
-.burst-center {
-   transform-origin: 60px 60px;
-   animation: burst-center-pop 0.7s;
-}
-@keyframes burst-center-pop {
-   0% { transform: scale(0);}
-   60% { transform: scale(1.2);}
-   100% { transform: scale(1);}
-}
-
 /* Accordion for history at the bottom */
 .history-accordion {
    width: 100%;
